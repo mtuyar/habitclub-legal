@@ -1,0 +1,86 @@
+/* Habit Club — yasal sayfalar ortak stili.
+   Kaynak: habit-group/docs/  ·  Canlı: mtuyar.github.io/habitclub-legal/ */
+
+:root {
+  --bg: #F9F7F2;
+  --card: #ffffff;
+  --ink: #1A1A1A;
+  --muted: #6b665c;
+  --line: #e5e0d5;
+  --accent: #FF5C00;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--bg);
+  color: var(--ink);
+  margin: 0;
+  padding: 20px 20px 80px;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+main { max-width: 720px; margin: 0 auto; }
+
+h1 { font-style: italic; font-size: 2rem; margin: 20px 0 4px; line-height: 1.2; }
+h2 { font-size: 1.2rem; margin-top: 32px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+h3 { font-size: 1rem; margin: 22px 0 6px; }
+
+.updated { color: #8a8578; font-size: .9rem; margin-bottom: 28px; }
+a { color: var(--accent); }
+ul { padding-left: 22px; }
+li { margin: 4px 0; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.card.warn { border-color: var(--accent); background: #fff7f2; }
+
+/* Dil değiştirici */
+.lang {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: .85rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.lang a { text-decoration: none; font-weight: 600; }
+.lang .on { color: var(--ink); text-decoration: none; }
+
+/* Sağlayıcı tablosu */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.wrap { overflow-x: auto; }
+
+/* Adım listesi (hesap silme) */
+ol.steps { padding-left: 22px; }
+ol.steps li { margin: 8px 0; }
+
+footer {
+  margin-top: 44px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: .88rem;
+  color: var(--muted);
+}
+footer a { margin-right: 14px; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131316;
+    --card: #1c1c20;
+    --ink: #F2F0EA;
+    --muted: #9d978c;
+    --line: #33333b;
+    --accent: #FF8A4C;
+  }
+  .card.warn { background: #241a13; }
+}
