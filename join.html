@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habit Club · Odaya davet</title>
+<meta property="og:title" content="Habit Club'da odaya davet edildin 🌱">
+<meta property="og:description" content="Birlikte alışkanlık edinelim — her gün küçük bir adım, birlikte daha kolay. Dokun ve katıl.">
+<meta property="og:image" content="https://mtuyar.github.io/habitclub-legal/og-invite.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,700;1,400&family=Inter+Tight:wght@500;700;800&display=swap">
+<style>
+  :root { --bg:#F9F7F2; --card:#FFFFFF; --ink:#1A1A1A; --muted:#6F6A63; --line:#EBE6DC; --accent:#FF5C00; --soft:#FFE5D9; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0F0F12; --card:#1A1A1E; --ink:#F2F1EC; --muted:#A19C95; --line:#2C2C33; --accent:#FF6A1F; --soft:#2C1B10; } }
+  * { box-sizing: border-box }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:'Inter Tight',system-ui,sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px }
+  .card { width:100%; max-width:420px; background:var(--card); border:1px solid var(--line); border-radius:28px; padding:28px 24px; text-align:center }
+  .badge { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.12em; color:var(--accent); background:var(--soft); padding:6px 12px; border-radius:999px }
+  h1 { font-family:'Lora',Georgia,serif; font-size:28px; line-height:1.2; margin:18px 0 8px }
+  p { color:var(--muted); font-size:15px; line-height:1.5; margin:0 0 20px }
+  .code { font-size:34px; font-weight:800; letter-spacing:.3em; padding:14px; border-radius:16px; background:var(--bg); border:1px dashed var(--line); margin-bottom:8px }
+  .hint { font-size:12.5px; color:var(--muted); margin-bottom:22px }
+  .btn { display:block; text-decoration:none; font-weight:800; font-size:15.5px; border-radius:16px; padding:15px; margin-top:10px }
+  .primary { background:var(--accent); color:#fff }
+  .ghost { background:var(--bg); color:var(--ink); border:1px solid var(--line) }
+  .steps { text-align:left; font-size:13.5px; color:var(--muted); line-height:1.6; margin-top:22px; padding-left:18px }
+  button.copy { all:unset; cursor:pointer; color:var(--accent); font-weight:800; font-size:13px }
+</style>
+</head>
+<body>
+  <main class="card">
+    <span class="badge">HABIT CLUB</span>
+    <h1>Bir odaya davet edildin 🌱</h1>
+    <p>Arkadaşın seni birlikte alışkanlık edinmeye çağırıyor. Her gün küçük bir adım — birlikte daha kolay.</p>
+    <div class="code" id="code">······</div>
+    <div class="hint">Davet kodun · <button class="copy" id="copy" type="button">Kopyala</button></div>
+    <a class="btn primary" id="open" href="#">Uygulamada aç</a>
+    <a class="btn ghost" href="https://apps.apple.com/app/id6787689754">App Store'dan indir</a>
+    <a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.intibahtech.habitclub">Google Play'den indir</a>
+    <ol class="steps">
+      <li>Uygulamayı indir ve aç.</li>
+      <li>Gruplar → Keşfet'te <b>“Davet kodum var”</b>a dokun.</li>
+      <li>Yukarıdaki kodu yaz — odaya katıldın!</li>
+    </ol>
+  </main>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var code = (q.get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    var el = document.getElementById('code');
+    var open = document.getElementById('open');
+    if (code) {
+      el.textContent = code;
+      var deep = 'habitgroup://join/' + code;
+      open.href = deep;
+      // Uygulama yüklüyse doğrudan açmayı dene
+      setTimeout(function () { location.href = deep; }, 300);
+    } else {
+      el.textContent = '—';
+      open.style.display = 'none';
+    }
+    document.getElementById('copy').addEventListener('click', function () {
+      if (!code) return;
+      if (navigator.clipboard) navigator.clipboard.writeText(code).then(function () {
+        document.getElementById('copy').textContent = 'Kopyalandı ✓';
+      }).catch(function () {});
+    });
+  })();
+</script>
+</body>
+</html>
