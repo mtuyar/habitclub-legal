@@ -31,14 +31,14 @@
 <body>
   <main class="card">
     <span class="badge">HABIT CLUB</span>
-    <h1>Bir odaya davet edildin 🌱</h1>
+    <h1 id="title">Bir odaya davet edildin 🌱</h1>
     <p>Arkadaşın seni birlikte alışkanlık edinmeye çağırıyor. Her gün küçük bir adım — birlikte daha kolay.</p>
     <div class="code" id="code">······</div>
     <div class="hint">Davet kodun · <button class="copy" id="copy" type="button">Kopyala</button></div>
     <a class="btn primary" id="open" href="#">Uygulamada aç</a>
     <a class="btn ghost" href="https://apps.apple.com/app/id6787689754">App Store'dan indir</a>
     <a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.intibahtech.habitclub">Google Play'den indir</a>
-    <ol class="steps">
+    <ol class="steps" id="steps">
       <li>Uygulamayı indir ve aç.</li>
       <li>Gruplar → Keşfet'te <b>“Davet kodum var”</b>a dokun.</li>
       <li>Yukarıdaki kodu yaz — odaya katıldın!</li>
@@ -48,9 +48,23 @@
   (function () {
     var q = new URLSearchParams(location.search);
     var code = (q.get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    // ?r=KULLANICIADI: arkadaş daveti (oda değil) → habitgroup://invite/AD, ödül uygulamada otomatik
+    var ref = (q.get('r') || '').replace(/^@/, '').replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 30);
     var el = document.getElementById('code');
     var open = document.getElementById('open');
-    if (code) {
+    if (!code && ref) {
+      document.getElementById('title').textContent = 'Habit Club\'a davet edildin 🌱';
+      el.textContent = '@' + ref;
+      el.style.letterSpacing = '.04em';
+      document.getElementById('steps').innerHTML =
+        '<li>Uygulamayı indir ve kaydol.</li>' +
+        '<li>Profil → Arkadaşını davet et → <b>“Arkadaşının davet kodu mu var?”</b>a dokun.</li>' +
+        '<li>Yukarıdaki kodu yaz — ikiniz de puan kazanırsınız.</li>';
+      code = '@' + ref;
+      var deepRef = 'habitgroup://invite/' + encodeURIComponent(ref);
+      open.href = deepRef;
+      setTimeout(function () { location.href = deepRef; }, 300);
+    } else if (code) {
       el.textContent = code;
       var deep = 'habitgroup://join/' + code;
       open.href = deep;
